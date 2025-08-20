@@ -20,7 +20,7 @@ jobs:
               GITLAB_SSH_KEY: ${{ secrets.GITLAB_DEPLOY_KEY_INUN }}
             run: |
               mkdir -p ~/.ssh
-              echo "$GITLAB_SSH_KEY" > ~/.ssh/id_rsa
+              echo "$GITLAB_SSH_KEY_INUN" > ~/.ssh/id_rsa
               chmod 600 ~/.ssh/id_rsa
               ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
     
