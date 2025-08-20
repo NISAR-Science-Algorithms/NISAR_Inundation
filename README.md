@@ -1,10 +1,9 @@
-# NISAR_L3_Wetlands
+# NISAR L3 Inundation
 Repository for L3 science products for the Ecosystems Wetlands workflow
 
 
 
-### ***NISAR_L3_Wetlands_ProductGeneration.ipynb:***
-This notebook describes the ATBD for generating a wetland inundation product from NISAR time series data stacks. The algorithm implemented within is designed to meet the Level-2 Science requirement for detecting inundated vegetation.  The contents of this repository  is tailored to provide users the supported resources needed to generate the L3 product, including a cropped & coregistered NISAR-simulated GCOV time series stack, an array of thresholds derived from ..., a geojson file specifying the AOI, as well as a configuration file.  
+### ***NISAR_L3_Inundation_ProductGeneration.ipynb:***
 
 
 
@@ -13,13 +12,15 @@ This notebook describes the ATBD for generating a wetland inundation product fro
 
 2) Clone your fork to your local machine with an SSH key
    ```
-   git clone git@github.com:{your_github_username}/NISAR_Wetlands.git
+
+   git clone git@github.com:{your_github_username}/NISAR_Inundation.git
+
    ```
 3) Install the required Python packages
    ```
-   cd NISAR_Wetlands
+   cd NISAR_Inundation
    conda env create -f requirements.yml
-   conda activate NISAR_Wetlands
+   conda activate NISAR_Inundation
    ```
 4) Run the notebooks
    ```
@@ -62,6 +63,3 @@ test
 8) Push your commit to your branch in your fork
    ```
    git push --set-upstream origin {your_branch}
-   ```
-9) Go back to your fork on Github.com and submit a merge request
-    
