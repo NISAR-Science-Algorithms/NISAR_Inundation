@@ -26,5 +26,5 @@ jobs:
     
           - name: Push to GitLab
             run: |
-              git remote add gitlab git@gitlab.com:nisar-science-algorithms/ecosystems/inundation/ProductGeneration.git
+              git remote add gitlab git@gitlab.com:nisar-science-algorithms/ecosystems/inundation/productgeneration.git
               git push gitlab main
