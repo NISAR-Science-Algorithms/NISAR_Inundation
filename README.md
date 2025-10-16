@@ -21,12 +21,12 @@ Repository for L3 science products for the Ecosystems Wetlands workflow
    cd NISAR_Inundation
    conda env create -f requirements.yml
    conda activate NISAR_Inundation
+   python -m ipykernel install --user --name=NISAR_Inundation
    ```
 4) Run the notebooks
    ```
    jupyter notebook
    ```
-test
 
    
 ### For Developers Submitting Code
@@ -63,5 +63,6 @@ test
 8) Push your commit to your branch in your fork
    ```
    git push --set-upstream origin {your_branch}
+
 
 
