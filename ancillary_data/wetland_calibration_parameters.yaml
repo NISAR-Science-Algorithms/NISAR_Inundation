@@ -1,0 +1,77 @@
+runconfig:
+  calval_sites:
+    Yucatan_Lake:
+      inun_veg_class1:
+        HH_max: null
+        HH_min: null
+        HV_max: null
+        HV_min: null
+        ratio_max: null
+        ratio_min: null
+        scattering: bright HH
+        vegetation: flooded forest
+      inun_veg_class2:
+        HH_max: null
+        HH_min: null
+        HV_max: null
+        HV_min: null
+        ratio_max: null
+        ratio_min: null
+        scattering: high ratio
+        vegetation: herbaceous
+      inun_veg_single_class:
+        HH_max: 10
+        HH_min: 0.42448979591836733
+        HV_max: null
+        HV_min: null
+        ratio_max: 500
+        ratio_min: 1.2000000000000002
+        scattering: either bright HH or high ratio
+        vegetation: flooded forest or inundated herbaceous
+      open_water:
+        HH_max: null
+        HH_min: null
+        HV_max: null
+        HV_min: null
+        product_max: null
+        product_min: null
+        sum_max: 0.06800000369548798
+        sum_min: 0.0
+    NewOrleans:
+      inun_veg_class1:
+        HH_max: null
+        HH_min: null
+        HV_max: null
+        HV_min: null
+        ratio_max: null
+        ratio_min: null
+        scattering: bright HH
+        vegetation: flooded forest
+      inun_veg_class2:
+        HH_max: null
+        HH_min: null
+        HV_max: null
+        HV_min: null
+        ratio_max: null
+        ratio_min: null
+        scattering: high ratio
+        vegetation: herbaceous
+      inun_veg_single_class:
+        HH_max: 0.00000001
+        HH_min: 0.0000000003
+        HV_max: null
+        HV_min: null
+        ratio_max: 500
+        ratio_min: 10.2000000000000002
+        scattering: either bright HH or high ratio
+        vegetation: flooded forest or inundated herbaceous
+      open_water:
+        HH_max: null
+        HH_min: null
+        HV_max: null
+        HV_min: null
+        product_max: null
+        product_min: null
+        sum_max: 0.0000000025
+        sum_min: 0.0
+  name: wetland_calibration_parameters
