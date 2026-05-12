@@ -25,3 +25,5 @@ dependencies:
   - pre-commit  
   - rioxarray
   - papermill
+  - h5netcdf
+  - dask
