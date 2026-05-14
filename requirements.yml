@@ -27,3 +27,5 @@ dependencies:
   - papermill
   - h5netcdf
   - dask
+  - jupyterlab-myst
+  - ipyleaflet
