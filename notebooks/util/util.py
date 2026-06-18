@@ -14,12 +14,3 @@ def nisar_start_time_from_url(s3_url: str) -> datetime:
         raise ValueError(f"No NISAR timestamp found in: {s3_url}")
     
     return datetime.strptime(m.group(1), "%Y%m%dT%H%M%S")
-
-def input_with_default(prompt, default):
-    value = input(f"{prompt} [{default}]: ").strip()
-    if value:
-        print(f"{value}\n")
-        return value
-    else:
-        print(f"{default}\n")
-        return default
