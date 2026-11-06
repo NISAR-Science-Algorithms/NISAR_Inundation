@@ -1,10 +1,10 @@
-from ipyleaflet import Map, Polygon, Polyline, basemap_to_tiles, basemaps, TileLayer, WidgetControl
+from ipyleaflet import Map, GeoJSON, Polygon, Polyline, basemap_to_tiles, basemaps, TileLayer, WidgetControl
 import ipywidgets as widgets
 from itertools import cycle
 from shapely import wkt
 
 
-def plot_aoi_coverage(gpolygons, aoi_wkt):
+def plot_aoi_coverage(gpolygons, aoi_wkt, tracks, frames):
     colors = cycle([
         "yellow",
         "cyan",
@@ -17,7 +17,8 @@ def plot_aoi_coverage(gpolygons, aoi_wkt):
     all_lats = []
     all_lons = []
     
-    m = Map(zoom=7)
+    m = Map(zoom=7, scroll_wheel_zoom=True,
+            layout=widgets.Layout(width="100%", height="700px"))
     
     m.add(basemap_to_tiles(basemaps.Esri.WorldImagery))
     
@@ -27,8 +28,15 @@ def plot_aoi_coverage(gpolygons, aoi_wkt):
         name="Esri Boundaries and Places",
     )
     m.add(labels)
+
+    info = widgets.HTML("Hover over an extent")
+    m.add(WidgetControl(widget=info, position="topright"))
+
+    def on_hover(feature, **kwargs):
+        p = feature["properties"]
+        info.value = f"<b>Track</b> {p['track']} &nbsp; <b>Frame</b> {p['frame']}"
     
-    for gpolygon, color in zip(gpolygons, colors):
+    for gpolygon, track, frame, color in zip(gpolygons, tracks, frames, colors):
         points = gpolygon["Boundary"]["Points"]
     
         lats = [p["Latitude"] for p in points]
@@ -36,25 +44,21 @@ def plot_aoi_coverage(gpolygons, aoi_wkt):
     
         all_lats.extend(lats)
         all_lons.extend(lons)
-    
-        bbox_locations = [
-            [min(lats), min(lons)],
-            [min(lats), max(lons)],
-            [max(lats), max(lons)],
-            [max(lats), min(lons)],
-            [min(lats), min(lons)],
-        ]
-    
-        m.add(
-            Polygon(
-                locations=bbox_locations,
-                color=color,
-                fill_color=color,
-                fill_opacity=0.15,
-                weight=2,
-                name=f"Extent {color}",
-            )
+
+        ring = [[min(lons), min(lats)], [max(lons), min(lats)], [max(lons), max(lats)],
+                [min(lons), max(lats)], [min(lons), min(lats)]]   # GeoJSON is [lon, lat]
+
+        layer = GeoJSON(
+            data={"type": "Feature",
+                  "properties": {"track": track, "frame": frame},
+                  "geometry": {"type": "Polygon", "coordinates": [ring]}},
+            style={"color": color, "fillColor": color, "fillOpacity": 0.15, "weight": 2},
+            hover_style={"fillOpacity": 0.4, "weight": 3},
+            name=f"Track {track} Frame {frame}",
         )
+        layer.on_hover(on_hover)
+        m.add(layer)
+    
     
     subset_poly = wkt.loads(aoi_wkt)
     subset_locations = [[lat, lon] for lon, lat in subset_poly.exterior.coords]
