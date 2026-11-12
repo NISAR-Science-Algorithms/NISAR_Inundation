@@ -4,7 +4,7 @@ from itertools import cycle
 from shapely import wkt
 
 
-def plot_aoi_coverage(gpolygons, aoi_wkt, tracks, frames):
+def plot_aoi_coverage(gpolygons, aoi_wkt, tracks, frames, orbit_directions):
     colors = cycle([
         "yellow",
         "cyan",
@@ -34,9 +34,9 @@ def plot_aoi_coverage(gpolygons, aoi_wkt, tracks, frames):
 
     def on_hover(feature, **kwargs):
         p = feature["properties"]
-        info.value = f"<b>Track</b> {p['track']} &nbsp; <b>Frame</b> {p['frame']}"
+        info.value = f"<b>Track</b> {p['track']} &nbsp; <b>Frame</b> {p['frame']} &nbsp; <b>Orbit Direction</b> {p['orbit_direction']}"
     
-    for gpolygon, track, frame, color in zip(gpolygons, tracks, frames, colors):
+    for gpolygon, track, frame, orbit_direction, color in zip(gpolygons, tracks, frames, orbit_directions, colors):
         points = gpolygon["Boundary"]["Points"]
     
         lats = [p["Latitude"] for p in points]
@@ -50,7 +50,7 @@ def plot_aoi_coverage(gpolygons, aoi_wkt, tracks, frames):
 
         layer = GeoJSON(
             data={"type": "Feature",
-                  "properties": {"track": track, "frame": frame},
+                  "properties": {"track": track, "frame": frame, "orbit_direction": orbit_direction},
                   "geometry": {"type": "Polygon", "coordinates": [ring]}},
             style={"color": color, "fillColor": color, "fillOpacity": 0.15, "weight": 2},
             hover_style={"fillOpacity": 0.4, "weight": 3},
